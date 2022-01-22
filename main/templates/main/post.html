@@ -1,0 +1,6 @@
+{% extends "main/base.html" %}
+{% block content %}
+<h4 class="post-header">{{ post.title }}</h4>
+<img src='{{ post.image.url }}' class="post-image">
+<p class="post-content">{{ post.article }}</p>
+{% endblock %}
