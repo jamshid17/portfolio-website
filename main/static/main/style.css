@@ -46,7 +46,7 @@ nav{
 .nav-item{
     text-decoration: none;
     color: var(--text_color);
-    margin-right: 25hpx;
+    margin-right: 25px;
 }
 .nav-item:hover{
     color: var(--text_color);
