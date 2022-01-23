@@ -74,6 +74,7 @@ cover/
 # Django stuff:
 style_test.css
 test.html
+test.py
 # Flask stuff:
 instance/
 .webassets-cache
