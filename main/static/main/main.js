@@ -10,64 +10,139 @@ var card_headers = document.getElementsByClassName("card-header");
 // colors 
 var black_color = "#1A202C";
 var white_color = "#FFFFFF";
-
+//motivational quotes
+var motivational_quotes = ['You can do it!', 'Be humble', 'Who wants to be in comfort zone? Not me!','No pressure, no diamonds']
+var finished_quotes = ['DONE!', 'Look at this humbler!', 'Great job, what about 5 minute rest and 2-round?', 'My boyyyyyy! (execuse me if you are girl)']
+var questional_quotes = ['I hope you stopped for a good reason', 'You will get it next time', 'Emergency?', 'You probably tired, right?'] 
 //timer page 
 var timing = false;
+var timeIntervalId;
+var selected_time;
 var main_container = document.getElementById("main-container");
+var time_text = document.getElementById('time');
+var motivation = document.getElementById('motivation');
 var start_reset_btn = document.getElementById("start-reset-btn");
 var vertical_loader_fill = document.getElementById('vertical-loader-fill-id');
 var background_musics = document.getElementsByClassName('b-music-card');
 var timer_options = document.getElementsByClassName('t-option-card');
+var musicAudios = document.getElementsByClassName('music-audio');
 
-
+//timer page -------
 if (document.title == "itsme-Jamshid | timer"){
     main_container.style.width = "100%";
 }
 
+//updating time 
+function updateTime(){
+    var time_text_prettified = document.getElementById('time').innerHTML.replaceAll(' ', '').replaceAll('\n', '')
+    var minutes_left = parseInt(time_text_prettified.split(':')[0]);
+    var seconds_left = parseInt(time_text_prettified.split(':')[1]);
+    if (seconds_left == 0){
+        if (minutes_left != 0){
+            minutes_left -= 1;
+            seconds_left = 60; 
+        }
+        else{
+            time_text.innerHTML = '25:00';
+        }
+    }
+    seconds_left -= 1;
+    if (seconds_left.toString().length == 1){
+        seconds_left = '0' + seconds_left.toString();
+    }
+    time_text.innerHTML = `${minutes_left}:${seconds_left}`;
+}
+ 
+
+//start/reset button functions
 start_reset_btn.onclick = function(){
     if (!timing){
         timing = true;
+        timeIntervalId = setInterval('updateTime()', 1000);
         vertical_loader_fill.classList.add('vertical-loader-fill'); 
         vertical_loader_fill.style.backgroundColor = '#1DB954';
-        var selected_time = parseInt(time_option_function(timer_options));
-        console.log(selected_time*60);
-        vertical_loader_fill.style["animation"] = `fill ${selected_time*60}s linear`
+        selected_time = parseInt(time_option_function(timer_options));
+        vertical_loader_fill.style["animation"] = `fill ${selected_time*60}s linear` //
         start_reset_btn.style['backgroundColor'] = 'transparent';
         start_reset_btn.style['border'] = '1px #1DB954 solid';
         start_reset_btn.innerHTML = 'reset';
+        motivation.style.color = '#1A202C';
+        motivation.innerHTML = motivational_quotes[Math.floor(Math.random()*motivational_quotes.length)]
     }
     else{
         timing = false;
+        clearInterval(timeIntervalId);
+        time_text.innerHTML = `${selected_time}:00`;
+        stopMusic();
         vertical_loader_fill.style['animation'] = 'none';
         vertical_loader_fill.classList.remove('vertical-loader-fill');
         start_reset_btn.style['backgroundColor'] = '#1DB954';
         start_reset_btn.style['border'] = 'none';
-        start_reset_btn.innerHTML = 'start'
-
+        start_reset_btn.innerHTML = 'start';
+        motivation.innerHTML = questional_quotes[Math.floor(Math.random()*questional_quotes.length)];
     }
 }
+//time finished
+vertical_loader_fill.addEventListener('animationend', timeEnd, false)
+function timeEnd(){
+    timing = false;
+    clearInterval(timeIntervalId);
+    time_text.innerHTML = `${selected_time}:00`;
+    stopMusic();
+    vertical_loader_fill.style['animation'] = 'none';
+    vertical_loader_fill.classList.remove('vertical-loader-fill');
+    start_reset_btn.style['backgroundColor'] = '#1DB954';
+    start_reset_btn.style['border'] = 'none';
+    start_reset_btn.innerHTML = 'start';
+    motivation.innerHTML = finished_quotes[Math.floor(Math.random()*finished_quotes.length)];
+}
+//background music cards and audios
 for (let music of background_musics){
     music.onclick = function(){
         if (!music.classList.contains("bordered-card")){
             for (let m of background_musics){
-                m.classList.remove('bordered-card')
+                if (m.classList.contains('bordered-card')){
+                    m.classList.remove('bordered-card');
+                    audioNeedStop = m.firstElementChild.lastElementChild;
+                    audioNeedStop.pause();
+                    audioNeedStop.currentTime = 0;
+                }
             }
-            music.classList.add('bordered-card')
+            music.classList.add('bordered-card');
+            music_name = music.firstElementChild.children.item(1).innerHTML;
+            if (music_name != 'no music'){
+                let musicAudio = music.firstElementChild.lastElementChild;
+                musicAudio.play();
+            }
+
         }
     }
 }
 
+function stopMusic(){
+    for (let music of background_musics){
+        if (music.classList.contains('bordered-card')){
+            let musicAudio = music.firstElementChild.lastElementChild;
+            musicAudio.pause();
+            musicAudio.currentTime = 0;
+        }
+    }
+}
+// time options 
 for (let option of timer_options){
     option.onclick = function(){
         if (!timing){
             if (!option.classList.contains('bordered-card-2')){
                 for (let o of timer_options){
                     o.classList.remove('bordered-card-2');}
-                option.classList.add('bordered-card-2')
+                option.classList.add('bordered-card-2');
+                time_text.innerHTML = `${option.textContent.replaceAll(' ', '').slice(1,3)}:00` 
             }
         }
     }
 }
+
+
 function time_option_function(options){
     for (let option of options){
         if (option.classList.contains('bordered-card-2')){
@@ -76,6 +151,8 @@ function time_option_function(options){
     }
 }
 
+
+// dark/bright theme
 dark_bright_btn.onclick = function(){
     if (dark_or_bright == "Bright"){
         dark_or_bright = "Dark";

@@ -14,6 +14,7 @@ class Post(models.Model):
 class Music(models.Model):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="media/")
+    music = models.FileField(upload_to='music/', default='amari.mp3')
 
     def __str__(self):
         return self.title

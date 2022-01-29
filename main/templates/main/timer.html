@@ -4,7 +4,8 @@
 <div id="time">
     25:00
 </div>
-<div id="motivation">Do not give up!</div>
+
+<div id="motivation">motivation</div>
 <div id="vertical-loader">
     <span class="vertical-loader-fill" id="vertical-loader-fill-id"></span>
 </div>
@@ -15,8 +16,11 @@
     {% for music in musics %}
         <div class="b-music-card {% if music.title == 'no music' %} bordered-card {% endif %}">
             <a class="b-music-card-link" >
-                <img src="{{ music.image.url }}" alt="no signal">
+                <img src="{{ music.image.url }}" alt="no signal">                
                 <p class="music-name">{{ music.title }}</p>
+                <audio loop class="music-audio" >
+                    <source src="{{ music.music.url }}" type="audio/mpeg">
+                 </audio>
             </a>
         </div>
     {% endfor %}

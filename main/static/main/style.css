@@ -348,13 +348,16 @@ footer{
 #time{
     text-align: center;
     font-size: 80px;
-    margin-top: 100px;
-    margin-bottom: 30px;
+    margin-top: 80px;
+    margin-bottom: 10px;
 }
 #motivation{
     font-size: 14px;
     text-align: center;
+    margin-bottom: 5px;
     color: #F0E7DB;
+    transition: all 500ms ease-in-out;
+
 }
 #vertical-loader{
     height: 50px;
@@ -424,7 +427,7 @@ footer{
     color: var(--text_color);
 }
 #timer-options-div{
-    margin: 50px 130px;
+    margin: 50px 130px 40px 130px;
 }
 .t-option-card{
     display: flex;
