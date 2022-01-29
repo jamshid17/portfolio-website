@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Music
 # Create your views here.
 def home(request):
     return render(request, 'main/home.html')
@@ -21,3 +21,10 @@ def post(request, id):
 def impossible(request):
     return render(request, "main/impossible.html", context={"title":"Impossible list"})
 
+def timer(request):
+    musics = Music.objects.all()
+    context = {
+        "title":"timer",
+        "musics":musics
+        }
+    return render(request, 'main/timer.html', context=context)

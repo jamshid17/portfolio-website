@@ -11,6 +11,71 @@ var card_headers = document.getElementsByClassName("card-header");
 var black_color = "#1A202C";
 var white_color = "#FFFFFF";
 
+//timer page 
+var timing = false;
+var main_container = document.getElementById("main-container");
+var start_reset_btn = document.getElementById("start-reset-btn");
+var vertical_loader_fill = document.getElementById('vertical-loader-fill-id');
+var background_musics = document.getElementsByClassName('b-music-card');
+var timer_options = document.getElementsByClassName('t-option-card');
+
+
+if (document.title == "itsme-Jamshid | timer"){
+    main_container.style.width = "100%";
+}
+
+start_reset_btn.onclick = function(){
+    if (!timing){
+        timing = true;
+        vertical_loader_fill.classList.add('vertical-loader-fill'); 
+        vertical_loader_fill.style.backgroundColor = '#1DB954';
+        var selected_time = parseInt(time_option_function(timer_options));
+        console.log(selected_time*60);
+        vertical_loader_fill.style["animation"] = `fill ${selected_time*60}s linear`
+        start_reset_btn.style['backgroundColor'] = 'transparent';
+        start_reset_btn.style['border'] = '1px #1DB954 solid';
+        start_reset_btn.innerHTML = 'reset';
+    }
+    else{
+        timing = false;
+        vertical_loader_fill.style['animation'] = 'none';
+        vertical_loader_fill.classList.remove('vertical-loader-fill');
+        start_reset_btn.style['backgroundColor'] = '#1DB954';
+        start_reset_btn.style['border'] = 'none';
+        start_reset_btn.innerHTML = 'start'
+
+    }
+}
+for (let music of background_musics){
+    music.onclick = function(){
+        if (!music.classList.contains("bordered-card")){
+            for (let m of background_musics){
+                m.classList.remove('bordered-card')
+            }
+            music.classList.add('bordered-card')
+        }
+    }
+}
+
+for (let option of timer_options){
+    option.onclick = function(){
+        if (!timing){
+            if (!option.classList.contains('bordered-card-2')){
+                for (let o of timer_options){
+                    o.classList.remove('bordered-card-2');}
+                option.classList.add('bordered-card-2')
+            }
+        }
+    }
+}
+function time_option_function(options){
+    for (let option of options){
+        if (option.classList.contains('bordered-card-2')){
+            return option.textContent.replaceAll(' ', '').slice(1,3);
+        }
+    }
+}
+
 dark_bright_btn.onclick = function(){
     if (dark_or_bright == "Bright"){
         dark_or_bright = "Dark";

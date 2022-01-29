@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<div id="time">
+    25:00
+</div>
+<div id="motivation">Do not give up!</div>
+<div id="vertical-loader">
+    <span class="vertical-loader-fill" id="vertical-loader-fill-id"></span>
+</div>
+<div class="d-flex justify-content-center">
+    <button id="start-reset-btn" class="btn ">start</button>
+</div>
+<div id="background-music-div" class="d-flex flex-row justify-content-between">
+    {% for music in musics %}
+        <div class="b-music-card {% if music.title == 'no music' %} bordered-card {% endif %}">
+            <a class="b-music-card-link" >
+                <img src="{{ music.image.url }}" alt="no signal">
+                <p class="music-name">{{ music.title }}</p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<div id="timer-options-div" class="d-flex flex-row justify-content-between">
+    <div class="t-option-card bordered-card-2">
+        <div>25 min</div>
+    </div>
+    <div class="t-option-card">
+        <div>15 min</div>
+    </div>
+    <div class="t-option-card">
+        <div>45 min</div>
+    </div>
+    <div class="t-option-card">
+        <div>60 min</div>
+    </div>
+</div>
+
+{% endblock %}
