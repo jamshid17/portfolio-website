@@ -77,7 +77,8 @@ nav{
 }
 
 #dark-bright-btn:active{
-    border: 10px solid rgba(0, 0, 0, .4);
+    box-shadow: none;
+
 }
 
 #main-container{
