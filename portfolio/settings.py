@@ -76,24 +76,24 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dcrhgpbjekcnp9',
-        'USER': 'ylvqujeizxndub',
-        'PASSWORD': '3f31bf6d83086f3aa2c035b43660d1113eabc27cdd883fa32a010e2b23317baa',
-        'HOST': 'ec2-3-222-49-168.compute-1.amazonaws.com',
-        'PORT': '5432',
-
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dcrhgpbjekcnp9',
+#         'USER': 'ylvqujeizxndub',
+#         'PASSWORD': '3f31bf6d83086f3aa2c035b43660d1113eabc27cdd883fa32a010e2b23317baa',
+#         'HOST': 'ec2-3-222-49-168.compute-1.amazonaws.com',
+#         'PORT': '5432',
+
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -141,16 +141,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'main', 'templates'),
 )
-import django_heroku
-django_heroku.settings(locals())
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-
-
-# import dj_database_url 
-# prod_db  =  dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(prod_db)
 
