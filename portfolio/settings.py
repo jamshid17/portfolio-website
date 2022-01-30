@@ -27,7 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 ALLOWED_HOSTS = ['itsmejamshid.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://itsmejamshid.herokuapp.com/']
+CSRF_TRUSTED_ORIGINS = ['https://itsmejamshid.herokuapp.com']
+
 
 # Application definition
 
