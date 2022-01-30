@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-sf5m^26azf&0$#8s6z7wd4g279+^)7@@g0*v_1-hd9v%q9(*_p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['itsmejamshid.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','itsmejamshid.herokuapp.com']
 
 
 # Application definition
@@ -141,8 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'main', 'templates'),
 )
-
-
+import django_heroku
+django_heroku.settings(locals())
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
